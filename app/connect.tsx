@@ -1,15 +1,24 @@
 import Container from "@/components/UI/Container";
+import { useWeb3Modal } from "@web3modal/wagmi-react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import { useRouter } from "expo-router";
+import React, { useEffect } from "react";
 import { useWindowDimensions } from "react-native";
 import { Button, SizableText, YStack } from "tamagui";
-import { useWeb3Modal } from "@web3modal/wagmi-react-native";
+import { useAccount } from "wagmi";
 
 export default function Connect() {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const { isConnected } = useAccount();
   const { width, height } = useWindowDimensions();
-  const { open, close } = useWeb3Modal();
+  const { open } = useWeb3Modal();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isConnected) {
+      router.replace("/room");
+    }
+  }, [isConnected]);
 
   return (
     <Container>

@@ -6,9 +6,9 @@ import {
 import { TamaguiProvider } from "@tamagui/core";
 import "@walletconnect/react-native-compat";
 import {
+  Web3Modal,
   createWeb3Modal,
   defaultWagmiConfig,
-  Web3Modal,
 } from "@web3modal/wagmi-react-native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -17,8 +17,8 @@ import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import "react-native-reanimated";
 import { arbitrum, mainnet, polygon } from "viem/chains";
-import { tamaguiConfig } from "../tamagui.config";
 import { WagmiConfig } from "wagmi";
+import { tamaguiConfig } from "../tamagui.config";
 
 const projectId = process.env.EXPO_PUBLIC_WALLET_CONNECT_ID || "";
 
@@ -48,7 +48,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
+  const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
@@ -81,6 +81,7 @@ function RootStack() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="connect" options={{ headerShown: false }} />
+      <Stack.Screen name="room" options={{ headerShown: false }} />
     </Stack>
   );
 }
