@@ -1,3 +1,4 @@
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import {
   DarkTheme,
   DefaultTheme,
@@ -15,6 +16,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 import { arbitrum, mainnet, polygon } from "viem/chains";
 import { WagmiConfig } from "wagmi";
@@ -23,17 +25,20 @@ import { tamaguiConfig } from "../tamagui.config";
 const projectId = process.env.EXPO_PUBLIC_WALLET_CONNECT_ID || "";
 
 const metadata = {
-  name: "Web3Modal RN",
-  description: "Web3Modal RN Example",
-  url: "https://web3modal.com",
-  icons: ["https://avatars.githubusercontent.com/u/37784886"],
+  name: "Huddle01",
+  description:
+    "Building the 1st decentralized real-time communication network. Leverage Huddle01's suite of developer-friendly SDKs to enable live audio & video experiences with just a quick plug-in.",
+  url: "https://huddle01.com/",
+  icons: [
+    "https://framerusercontent.com/images/E2CR4AUZW8VFxVZhLhWunPjTOM.png",
+  ],
   redirect: {
-    native: "YOUR_APP_SCHEME://",
-    universal: "YOUR_APP_UNIVERSAL_LINK.com",
+    native: "huddle01://",
+    universal: "https://huddle01.com/",
   },
 };
 
-const chains = [mainnet, polygon, arbitrum];
+const chains = [mainnet, polygon];
 
 const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 
@@ -64,13 +69,21 @@ export default function RootLayout() {
 
   return (
     <WagmiConfig config={wagmiConfig}>
-      <TamaguiProvider config={tamaguiConfig}>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <RootStack />
-        </ThemeProvider>
-      </TamaguiProvider>
+      <GestureHandlerRootView
+        style={{
+          flex: 1,
+        }}
+      >
+        <BottomSheetModalProvider>
+          <TamaguiProvider config={tamaguiConfig}>
+            <ThemeProvider
+              value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+            >
+              <RootStack />
+            </ThemeProvider>
+          </TamaguiProvider>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
       <Web3Modal />
     </WagmiConfig>
   );
