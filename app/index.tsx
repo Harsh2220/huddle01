@@ -1,8 +1,7 @@
 import Container from "@/components/UI/Container";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
-import { ActivityIndicator } from "react-native";
-import { Stack } from "tamagui";
+import { Spinner, Stack } from "tamagui";
 import { useAccount } from "wagmi";
 
 export default function Loader() {
@@ -23,7 +22,7 @@ export default function Loader() {
   return (
     <Container>
       <Stack flex={1} justifyContent="center" alignItems="center">
-        <ActivityIndicator size={"small"} />
+        <Spinner size="small" />
       </Stack>
     </Container>
   );
