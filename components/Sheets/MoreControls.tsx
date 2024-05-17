@@ -9,16 +9,20 @@ import {
   Users,
 } from "@tamagui/lucide-icons";
 import { useWeb3Modal } from "@web3modal/wagmi-react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { TouchableOpacity, useColorScheme } from "react-native";
 import { Stack, Text } from "tamagui";
 import Sheet from "../UI/Sheet";
 import AllUsers from "./AllUsers";
+import { useAccount } from "wagmi";
+import { useRouter } from "expo-router";
 
 export default function MoreControls() {
   const colorScheme = useColorScheme();
+  const { isConnected } = useAccount();
   const { dismiss } = useBottomSheetModal();
   const { open } = useWeb3Modal();
+  const router = useRouter();
   const { setUsers, users } = useRoomStore();
   const allUsersRef = useRef<BottomSheetModal>(null);
 
@@ -95,6 +99,12 @@ export default function MoreControls() {
       },
     },
   ];
+
+  useEffect(() => {
+    if (!isConnected) {
+      router.push("/connect");
+    }
+  }, [isConnected]);
 
   return (
     <>
