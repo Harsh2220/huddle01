@@ -29,12 +29,12 @@ const Sheet = React.forwardRef<BottomSheetModalMethods, BottomSheetProps>(
         ref={ref}
         handleIndicatorStyle={{
           width: "10%",
-          backgroundColor: colorScheme === "dark" ? "black" : "white",
+          backgroundColor: colorScheme === "dark" ? "#17181B" : "#F1F3F4",
         }}
         backdropComponent={renderBackdrop}
         backgroundStyle={{
           borderRadius: 30,
-          backgroundColor: colorScheme === "dark" ? "black" : "white",
+          backgroundColor: colorScheme === "dark" ? "#17181B" : "#F1F3F4",
         }}
         {...props}
       >
