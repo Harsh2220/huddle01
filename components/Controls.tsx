@@ -49,8 +49,7 @@ export default function Controls() {
         justifyContent="center"
         width={"100%"}
         gap="$2"
-        position="absolute"
-        bottom="$4"
+        padding="$2"
       >
         {CONTROLS.map((control, index) => (
           <Button
