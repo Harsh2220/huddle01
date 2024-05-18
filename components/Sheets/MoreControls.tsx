@@ -9,16 +9,15 @@ import {
   Users,
 } from "@tamagui/lucide-icons";
 import { useWeb3Modal } from "@web3modal/wagmi-react-native";
+import { useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
-import { TouchableOpacity, useColorScheme } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Stack, Text } from "tamagui";
+import { useAccount } from "wagmi";
 import Sheet from "../UI/Sheet";
 import AllUsers from "./AllUsers";
-import { useAccount } from "wagmi";
-import { useRouter } from "expo-router";
 
 export default function MoreControls() {
-  const colorScheme = useColorScheme();
   const { isConnected } = useAccount();
   const { dismiss } = useBottomSheetModal();
   const { open } = useWeb3Modal();
@@ -29,12 +28,7 @@ export default function MoreControls() {
   const CONTROLS = [
     {
       name: "Add user",
-      icon: (
-        <UserPlus
-          color={colorScheme === "dark" ? "white" : "black"}
-          size={"$2"}
-        />
-      ),
+      icon: <UserPlus color={"$color"} size={"$2"} />,
       onPress: () => {
         setUsers(users + 1);
         dismiss();
@@ -42,12 +36,7 @@ export default function MoreControls() {
     },
     {
       name: "Remove user",
-      icon: (
-        <UserMinus
-          color={colorScheme === "dark" ? "white" : "black"}
-          size={"$2"}
-        />
-      ),
+      icon: <UserMinus color={"$color"} size={"$2"} />,
       onPress: () => {
         setUsers(users - 1);
         dismiss();
@@ -55,9 +44,7 @@ export default function MoreControls() {
     },
     {
       name: "All users",
-      icon: (
-        <Users color={colorScheme === "dark" ? "white" : "black"} size={"$2"} />
-      ),
+      icon: <Users color={"$color"} size={"$2"} />,
       onPress: () => {
         dismiss();
         allUsersRef.current?.present();
@@ -65,32 +52,17 @@ export default function MoreControls() {
     },
     {
       name: "Settings",
-      icon: (
-        <Settings
-          color={colorScheme === "dark" ? "white" : "black"}
-          size={"$2"}
-        />
-      ),
+      icon: <Settings color={"$color"} size={"$2"} />,
       onPress: () => {},
     },
     {
       name: "Message",
-      icon: (
-        <MessageSquare
-          color={colorScheme === "dark" ? "white" : "black"}
-          size={"$2"}
-        />
-      ),
+      icon: <MessageSquare color={"$color"} size={"$2"} />,
       onPress: () => {},
     },
     {
       name: "LogOut",
-      icon: (
-        <LogOut
-          color={colorScheme === "dark" ? "white" : "black"}
-          size={"$2"}
-        />
-      ),
+      icon: <LogOut color={"$color"} size={"$2"} />,
       onPress: () => {
         dismiss();
         open({
@@ -123,7 +95,9 @@ export default function MoreControls() {
             onPress={control.onPress}
           >
             {control.icon}
-            <Text color={"$background"}>{control.name}</Text>
+            <Text textAlign="center" theme={"alt2"}>
+              {control.name}
+            </Text>
           </TouchableOpacity>
         ))}
       </Stack>

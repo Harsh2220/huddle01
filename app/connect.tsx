@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { useWindowDimensions } from "react-native";
-import { Button, SizableText, YStack } from "tamagui";
+import { Button, SizableText, View, YStack } from "tamagui";
 import { useAccount } from "wagmi";
 
 export default function Connect() {
@@ -47,14 +47,24 @@ export default function Connect() {
         justifyContent="flex-end"
         gap={"$10"}
       >
-        <YStack alignItems="center">
-          <SizableText color={"white"} size="$12" fontFamily={"$mono"}>
+        <View alignItems="center">
+          <SizableText
+            color={"white"}
+            fontSize={width / 8}
+            lineHeight={width / 6}
+            fontFamily={"$mono"}
+          >
             Create Rooms
           </SizableText>
-          <SizableText color={"white"} size="$12" fontFamily={"$mono"}>
+          <SizableText
+            color={"white"}
+            fontSize={width / 8}
+            lineHeight={width / 6}
+            fontFamily={"$mono"}
+          >
             For free
           </SizableText>
-        </YStack>
+        </View>
         <Button
           onPress={() => {
             try {

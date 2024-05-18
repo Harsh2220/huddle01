@@ -64,7 +64,7 @@ export default function AllUsers() {
 
 function _ListHeaderComponent() {
   return (
-    <Text color={"$background"} textAlign="center" fontSize={"$8"}>
+    <Text color={"$color"} textAlign="center" fontSize={"$8"}>
       All Users
     </Text>
   );

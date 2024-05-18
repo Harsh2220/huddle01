@@ -16,7 +16,7 @@ function UserCard({ user }: { user: User }) {
           componentName={user.name}
         />
       </Avatar>
-      <Text color={"$background"} fontSize={"$6"}>
+      <Text color={"$color"} fontSize={"$6"}>
         {user.name}
       </Text>
     </XStack>

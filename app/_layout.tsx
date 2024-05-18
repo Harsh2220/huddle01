@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
-import { arbitrum, mainnet, polygon } from "viem/chains";
+import { mainnet, polygon } from "viem/chains";
 import { WagmiConfig } from "wagmi";
 import { tamaguiConfig } from "../tamagui.config";
 
@@ -74,15 +74,18 @@ export default function RootLayout() {
           flex: 1,
         }}
       >
-        <BottomSheetModalProvider>
-          <TamaguiProvider config={tamaguiConfig}>
-            <ThemeProvider
-              value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <BottomSheetModalProvider>
+            <TamaguiProvider
+              config={tamaguiConfig}
+              defaultTheme={colorScheme === "dark" ? "dark" : "light"}
             >
               <RootStack />
-            </ThemeProvider>
-          </TamaguiProvider>
-        </BottomSheetModalProvider>
+            </TamaguiProvider>
+          </BottomSheetModalProvider>
+        </ThemeProvider>
       </GestureHandlerRootView>
       <Web3Modal />
     </WagmiConfig>

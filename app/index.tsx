@@ -10,11 +10,11 @@ export default function Loader() {
 
   function handleUser() {
     if (isConnecting) return;
-    if (isConnected) {
-      router.replace("/room");
-    } else {
-      router.replace("/connect");
-    }
+    // if (isConnected) {
+    router.replace("/room");
+    // } else {
+    // router.replace("/connect");
+    // }
   }
 
   useEffect(handleUser, [isConnecting]);

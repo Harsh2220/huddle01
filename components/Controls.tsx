@@ -14,19 +14,23 @@ import MoreControls from "./Sheets/MoreControls";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 export default function Controls() {
-  const { isCameraOn, isMicOn } = useRoomStore();
+  const { isCameraOn, isMicOn, setIsCameraOn, setIsMicOn } = useRoomStore();
   const moreControlsRef = useRef<BottomSheetModal>(null);
 
   const CONTROLS = [
     {
       name: "Microphone",
       icon: isMicOn ? Mic : MicOff,
-      onPress: () => {},
+      onPress: () => {
+        setIsMicOn(!isMicOn);
+      },
     },
     {
       name: "Camera",
       icon: isCameraOn ? Camera : CameraOff,
-      onPress: async () => {},
+      onPress: async () => {
+        setIsCameraOn(!isCameraOn);
+      },
     },
     {
       name: "Switch camera",
@@ -59,7 +63,7 @@ export default function Controls() {
             size={"$5"}
             key={index}
             onPress={control.onPress}
-            bg={"$accentBackground"}
+            bg={"$blue5"}
           />
         ))}
       </Stack>
