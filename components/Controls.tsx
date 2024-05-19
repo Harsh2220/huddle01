@@ -7,15 +7,19 @@ import {
   MoreVertical,
   SwitchCamera,
 } from "@tamagui/lucide-icons";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button, Stack } from "tamagui";
 import Sheet from "./UI/Sheet";
 import MoreControls from "./Sheets/MoreControls";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { useAccount } from "wagmi";
+import { useRouter } from "expo-router";
 
 export default function Controls() {
   const { isCameraOn, isMicOn, setIsCameraOn, setIsMicOn } = useRoomStore();
   const moreControlsRef = useRef<BottomSheetModal>(null);
+  const { isConnected } = useAccount();
+  const router = useRouter();
 
   const CONTROLS = [
     {
@@ -45,6 +49,12 @@ export default function Controls() {
       },
     },
   ];
+
+  useEffect(() => {
+    if (!isConnected) {
+      router.push("/connect");
+    }
+  }, [isConnected]);
 
   return (
     <>
